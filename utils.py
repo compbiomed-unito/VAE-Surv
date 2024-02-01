@@ -62,8 +62,8 @@ def train_and_eval_model(train_loader, val_loader, params, dict_results=None, fr
                         activation=params['activation'],
                         dropout_vae=params['dropout_vae'],
                         dropout_coxnet=params['dropout_coxnet'],
-                        use_batchnorm=False
-                        KL_weight=params['KL_weight']
+                        use_batchnorm=False,
+                        KL_weight=params['KL_weight'],
                         loss_criterion='logcosh',
                         pretrain=pretrain)
     
