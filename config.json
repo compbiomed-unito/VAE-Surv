@@ -1,0 +1,27 @@
+{
+    "vae_hidden_dims": [128, 32],
+    "vae_latent_dim": 15,
+    "vae_activation": "ReLU",
+    "vae_dropout": 0.05,
+    "vae_batchnorm": false,
+
+    "survival_hidden_dims": [32],
+    "survival_activation": "Tanh",
+    "survival_dropout": 0.2,
+    "survival_batchnorm": false,
+
+    "alpha": 0.5,
+    "kl_weight": 1e-5,
+
+    "vae_epochs": 200,
+    "combo_epochs": 0,
+    "survival_epochs": 50,
+
+    "vae_learning_rate": 0.0005,
+    "combo_learning_rate": 1e-5,
+    "survival_learning_rate": 0.0002,
+
+    "batch_size": 128,
+    "device": "cuda",
+    "verbose": 2
+}
