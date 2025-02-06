@@ -62,7 +62,7 @@ def make_fnn_layers(dims, activation, dropout = 0.0, batchnorm = False):
                 layers.append(nn.BatchNorm1d(output_size))
             if dropout > 0.0:
                 layers.append(dropout_mod)
-            layers.append(activation_mod) # FIXME va prima activation o dropout?
+            layers.append(activation_mod)
     return nn.Sequential(*layers)
 
 
@@ -89,7 +89,7 @@ class VAE(nn.Module):
         mean, logvar = self.encode(x)
         softclamped_logvar = torch.clamp(logvar, min=-10.0, max=10.0)  #alternatively: torch.tanh(logvar / 10.0) * 10.0 
         stddev = torch.exp(0.5 * softclamped_logvar)
-        z = mean + stddev*torch.randn_like(stddev) if self.training else mean # FIXME do we want this?
+        z = mean + stddev*torch.randn_like(stddev) if self.training else mean
         r = self.decode(z)
         return dict(
             mean = mean,
@@ -243,7 +243,6 @@ class VAESurv(sklearn.base.BaseEstimator):
             weight_decay=self.survival_weight_decay)
         for epoch in progress(range(self.vae_epochs + self.combo_epochs, self.vae_epochs + self.combo_epochs + self.survival_epochs), desc='Post training'):
             self._train(epoch, optimizer, train_loader, test_loader, train_survival=True)
-            # FIXME test_loader has shuffle=True, cannot use for c-index with the original y_test...
             if test_loader is not None:
                 risk_test = self.predict(X_test)
                 self.train_history_.add_batch_losses(epoch, 'test', {
