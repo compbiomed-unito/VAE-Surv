@@ -75,34 +75,21 @@ The`mas` is a boolean array of shape `(n_features)` where:
 VAE-Surv employs a multi-phase training strategy:
 
 ### 1. VAE Pretraining (`vae_epochs`)
-- Trains **only the VAE** using **reconstruction loss + KL divergence**.
+- Trains **only the VAE** using reconstruction loss + KL divergence.
 - This phase allows the VAE to create a structured latent space before survival training.
 
 ### 2. Joint Training (`combo_epochs`)
-- Both the **VAE and the survival network** are trained together.
+- Both the VAE and the survival network are trained **together**.
 - The loss function combines:
   - **VAE loss**: Reconstruction loss + KL divergence.
   - **Survival loss**: Cox proportional hazards loss.
-- The weighting factor **`alpha`** controls the balance between VAE reconstruction and survival prediction.
+- The weighting factor `alpha` controls the balance between VAE reconstruction and survival prediction.
 
 ### 3. Survival Fine-tuning (`survival_epochs`, optional)
-- The **VAE is frozen**, and **only the survival network** is updated.
+- The **VAE is frozen**, and only the survival network is updated.
 - This phase helps optimize survival predictions without affecting the learned latent space.
 
-## Loss Function
 
-The total loss function used in the **joint training phase** is:
-
-\[
-L = (1 - \alpha) \cdot L_{\text{VAE}} + \alpha \cdot L_{\text{Survival}}
-\]
-
-where:
-- \( L_{\text{VAE}} \) = reconstruction loss + KL divergence.
-- \( L_{\text{Survival}} \) = Cox proportional hazards loss.
-- \( \alpha \) is a hyperparameter (`config["alpha"]`).
-
-   
 
 ## Citation
 If you use this work, please cite:
