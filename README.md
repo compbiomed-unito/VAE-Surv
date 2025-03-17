@@ -11,6 +11,10 @@
 - **Joint Training**: Optimizes both reconstruction (VAE) and survival loss to enhance predictive performance.
 
 The repository includes an example on the **METABRIC breast cancer dataset**, but the model is designed to work with any structured biomedical dataset containing molecular and clinical features.
+The schematic below illustrates the VAE-Surv framework, showing the integration of the Variational Autoencoder (VAE) with the survival prediction model:
+
+![VAE-Surv Framework](docs/VAE_surv_framework.png)
+
 
 ## Installation
 
